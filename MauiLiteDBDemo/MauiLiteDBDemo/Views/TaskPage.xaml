@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiLiteDBDemo.Behaviors"
+             xmlns:views="clr-namespace:MauiLiteDBDemo.Views"
+             x:Class="MauiLiteDBDemo.Views.TaskPage"
+             Title="TaskPage">
+    <VerticalStackLayout Padding="20">
+        
+        <Entry Placeholder="Nueva tarea" Text="{Binding TaskName}" />
+
+        <Button Text="Agregar Tarea"
+                Command="{Binding AddTaskCommand}"
+                BackgroundColor="DodgerBlue" 
+                TextColor="White"/>
+        
+        <!--<ListView ItemsSource="{Binding Tasks}" HasUnevenRows="True" BackgroundColor="Red">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="5">
+                            
+                            <CheckBox IsChecked="{Binding IsCompleted}">
+                                      <CheckBox.Behaviors>
+                                    <local:CheckBoxBehavior Command="{Binding Source={RelativeSource AncestorType={x:Type views:TaskPage}},
+                                                            Path=BindingContext.ToggleCompleteCommand}" />
+                                </CheckBox.Behaviors>
+                                </CheckBox>
+                            
+                            <Label Text="{Binding Name}"
+                                   VerticalOptions="CenterAndExpand"
+                                   FontSize="20"
+                                   Margin="10,0"/>
+                            
+                            <Button Text="❌"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type views:TaskPage}}, Path=BindingContext.DeleteTaskCommand}"
+                                    CommandParameter="{Binding}"
+                                    BackgroundColor="Transparent"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
+        <CollectionView ItemsSource="{Binding Tasks}" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- CheckBox para completar la tarea -->
+                        <CheckBox IsChecked="{Binding IsCompleted}">
+                                      <CheckBox.Behaviors>
+                                    <local:CheckBoxBehavior Command="{Binding Source={RelativeSource AncestorType={x:Type views:TaskPage}},
+                                                            Path=BindingContext.ToggleCompleteCommand}" />
+                                </CheckBox.Behaviors>
+                                </CheckBox>
+
+                            <!-- Nombre de la tarea -->
+                            <Label Text="{Binding Name}"
+                                   VerticalOptions="CenterAndExpand"
+                                   FontSize="20"
+                                   Margin="10,0"/>
+
+                            <!-- Botón para eliminar tarea -->
+                            <Button Text="❌"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type views:TaskPage}}, Path=BindingContext.DeleteTaskCommand}"
+                                    CommandParameter="{Binding}"
+                                    BackgroundColor="Transparent"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

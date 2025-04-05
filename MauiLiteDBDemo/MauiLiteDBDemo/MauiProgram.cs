@@ -1,4 +1,8 @@
-﻿namespace MauiLiteDBDemo;
+﻿using MauiLiteDBDemo.Services;
+using MauiLiteDBDemo.ViewModels;
+using MauiLiteDBDemo.Views;
+
+namespace MauiLiteDBDemo;
 
 public static class MauiProgram
 {
@@ -13,7 +17,12 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		return builder.Build();
+		// 🔹 Registrar servicios y ViewModels
+		builder.Services.AddSingleton<LiteDbService>();
+		builder.Services.AddSingleton<TasksViewModel>();
+		builder.Services.AddSingleton<TaskPage>();
+
+        return builder.Build();
 	}
 }
 
